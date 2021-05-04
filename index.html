@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="origin-trial"
+          content="_____"/>
+</head>
+<script>
+    async function connect() {
+        const url = 'quic-transport://example.com:4433/quictransport_example';
+        const transport = new QuicTransport(url);
+
+        transport.closed.then(() => {
+            console.log(`connection closed`);
+        }).catch((error) => {
+            console.error(`connection closed due to ${error}`);
+        });
+
+        await transport.ready;
+
+        const reader = transport.receiveDatagrams().getReader();
+        const writer = transport.sendDatagrams().getWriter();
+
+        while (true) {
+            console.log("wait read");
+            const res = await reader.read();
+            if (res.done) {
+                break;
+            }
+
+            const dataView = new DataView(res.value.buffer);
+            const value = dataView.getUint8(0);
+
+            console.log("receive dgram " + value);
+
+            if (value > 0) {
+                await writer.write(new Uint8Array([value - 1]));
+            } else {
+                transport.close();
+                break;
+            }
+        }
+    }
+</script>
+<body>
+<button onclick="connect();">connect</button>
+</body>
+</html>

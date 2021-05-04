@@ -1,0 +1,17 @@
+[package]
+name = "quic_transport_example_minimal"
+version = "0.1.0"
+authors = ["suzuki0keiichi"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+quinn = "0.7.2"
+tracing = "0.1.26"
+tracing-subscriber = "0.2.18"
+futures = "0.3.8"
+tokio = { version = "1.0.1", features = ["macros"] }
+rcgen = "0.8"
+ctrlc = "3.1.9"
+bytes = "1.0.1"
