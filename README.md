@@ -1,5 +1,7 @@
 # 概要
-Chrome+JSとQuinnを使ってQuicTransportを動かす最低限サンプル
+Chrome+JSとQuinnを使ってQuicTransportを動かす最低限のサンプル。
+
+ChromeとRustでUDP的なパケットをやり取りしたいけどまず動くところまで持っていくのが大変という人向けのものです。
 
 # 前準備
 - [Chrome Origin Trials](https://developers.chrome.com/origintrials/#/trials/active)でQuicTransportを有効にする
